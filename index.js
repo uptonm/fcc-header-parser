@@ -14,7 +14,11 @@ app.use(morgan('dev'));
 app.use(cors());
 
 app.get('/api/whoami', (req, res) => {
-  res.status(200).send(req.headers);
+  res.status(200).send({
+    ipaddress: req.headers['x-forwarded-for'],
+    language: req.headers['accept-language'],
+    software: req.headers['user-agent']
+  });
 });
 
 // app.get('*', (req, res) => {
